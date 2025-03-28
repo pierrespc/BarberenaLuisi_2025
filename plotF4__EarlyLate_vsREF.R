@@ -18,7 +18,8 @@ for(type in c("SNA")){
              paste("../F4_ref_toLateEarly/Lab_with_Compendium_GEHmodern.",set,"/TH",th,"/F4.Late_toEarlyRefs.finalSet.Lab_with_Compendium_GEHmodern.",set,".TH",th,".OUT",sep=""),
              "../../../ReferenceDataSet/ColorCompendium_ModernAndAncient_NoReichSG.tsv",
              "../../Uspallata_Annotation.tsv",
-             paste("F4_EarlyLate_vsRefs/F4_EarlyLate_vs",type,"Refs.",set,".pdf",sep=""))
+             #paste("F4_EarlyLate_vsRefs/F4_EarlyLate_vs",type,"Refs.",set,".pdf",sep=""))
+             paste("F4_EarlyLate_vsRefs/F4_EarlyLate_vs",type,"Refs.",set,".svg",sep=""))
     if(length(params)!=5){
       stop("<refPOPY> <refPOPX> <annotref> <annotstudy> <pdfout>")
     }
@@ -66,11 +67,12 @@ for(type in c("SNA")){
     
     f4<-rbind(f4popx[,c("REF","Compa","Color","Point","Region","Dstat","stderr","Z","BABA","ABBA","NSNPs")],f4popy[,c("REF","Compa","Color","Point","Region","Dstat","stderr","Z","BABA","ABBA","NSNPs")])
     
+    f4$Compa<-str_replace(f4$Compa,"ancient SA","ancient SNA")
     if(grepl("SG",set)){
       f4<-f4[ ! str_ends(f4$REF,".Capt"),]
     }
     
-    pdf(outfile)
+    svg(outfile)
     if(type=="SouthAmerica"){
       f4<-f4[  (grepl("Patagonia",f4$Region) | grepl("CentralAndes",f4$Region) | 
                   grepl("Brazil",f4$Region) | grepl("Pampa",f4$Region) |
@@ -102,7 +104,9 @@ for(type in c("SNA")){
             geom_hline(yintercept=0,linetype = 1)+
             theme_classic()+
             theme(legend.position="none",
-                  axis.text = element_text(size = 13))+
+                  family="Arial",
+                  axis.text = element_text(size = 13)
+                  )+
             scale_y_continuous(breaks=breaks)+
             labs(x="",y="Z"))
     

@@ -17,9 +17,11 @@ setwd("~/Documents/PostDocPasteur/aDNA/2024-09-01_Uspallata_noHighCov/Analyses/F
 plotMDS<-function(mdsFun,Maintitle,pdfName,Doggplot=T){
   #print(head(mdsFun))
   #print(sum(str_starts(names(mdsFun),"X")))
-  pdf(pdfName)
+  #pdf(pdfName)
+  #svg(pdfName)
   if(! Doggplot ){
     for(i in seq(1,sum(str_starts(names(mdsFun),"X")),2)){
+      svg(paste(pdfName,"_Dim",i,".Dim",i+1,".svg",sep=""))
       plot(mdsFun[,paste("X",i,sep="")],mdsFun[,paste("X",i+1,sep="")],"n",
            main=paste(Maintitle,"\nDim. ",i+1," vs Dim. ",i,sep=""),
            xlab=paste("Dim.",i),
@@ -35,9 +37,12 @@ plotMDS<-function(mdsFun,Maintitle,pdfName,Doggplot=T){
              bg=mdsFun$Color[mdsFun$Study=="PresentStudy"],
              cex=mdsFun$cex[mdsFun$Study=="PresentStudy"],
              lwd=2)
+      dev.off()
     }
   }else{
     for(i in seq(1,sum(str_starts(names(mdsFun),"X")),2)){
+      svg(paste(pdfName,"_Dim",i,".Dim",i+1,".svg",sep=""))
+      
       gg<-ggplot()+
         geom_point(x = as.numeric(mdsFun[,paste("X",i,sep="")]), y = as.numeric(mdsFun[,paste("X",i+1,sep="")]),
                    bg=mdsFun$Color,colour=ifelse(mdsFun$Point<21,mdsFun$Color,"black"),shape=mdsFun$Point,data=mdsFun,size=mdsFun$cex*2,
@@ -56,8 +61,10 @@ plotMDS<-function(mdsFun,Maintitle,pdfName,Doggplot=T){
         #annotate(geom="text",x=xright-rangeX/20,y=ytop-rangeY/40,label= "Color Coding",col="black",size=7)+
         theme_bw(base_size=10)
       print(gg)
+      dev.off()
     }
   }
+  svg(paste(pdfName,"_Legend.svg",sep=""))
   
   rascoLeg<-unique(mdsFun[mdsFun$Study=="PresentStudy",c("Population","Region","Point","Color")])
   plot(0,0,"n",axes=F,ann=F)
@@ -164,7 +171,7 @@ setind<-"Lab_with_Compendium_GEHmodern"
 TH<-50000
 
 ColorsALL<-c()
-for(setsnp in c("1240K","1240K.TVs","SG","SG.TVs")){
+for(setsnp in c("1240K","1240K.TVs","SG","SG.TVs")[1]){
   f3<-read.table(paste("../F3_IND/",setind,".",setsnp,"/TH",TH,"/",setind,".",setsnp,".OUT",sep=""),stringsAsFactors = F,header=T)
   f3<-f3[ ! (f3$Source1 %in% listINDremove | f3$Source2 %in% listINDremove),]
   famind<-read.table(paste("../DataSets/",setind,".",setsnp,"/","/finalSet",ifelse(TH==0,"",paste(".TH",TH,sep="")),".ind.txt",sep=""),stringsAsFactors = F,header=F)
@@ -234,7 +241,8 @@ for(setsnp in c("1240K","1240K.TVs","SG","SG.TVs")){
     
     plotMDS(mds,
             setsnp,
-            paste("F3_IND/",setind,".",setsnp,"_MDS.",subset,".pdf",sep=""),F)
+            #paste("F3_IND/",setind,".",setsnp,"_MDS.",subset,".pdf",sep=""),F)
+            paste("F3_IND/",setind,".",setsnp,"_MDS.",subset,".svg",sep=""),F)
     #write.table(mds,paste("F3_IND/",setind,".",setsnp,"_MDS.",subset,".tsv",sep=""),col.names=T,row.names=F,sep="\t",quote=F)
   
     f3<-read.table(paste("../F3_IND/",setind,".",setsnp,"/TH",TH,"/",setind,".",setsnp,".OUT",sep=""),stringsAsFactors = F,header=T)

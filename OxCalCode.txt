@@ -1,0 +1,483 @@
+The OxCal code is presented per figure in the text.
+
+Fig. 3b. 
+Plot()
+ {
+  Outlier_Model("offset 32 to 49 yr",Exp(1,-10,0),U(1.5,1.7),"t");
+  Outlier_Model("offset 28 to 49 yr",Exp(1,-10,0),U(1.4,1.7),"t");
+  Curve("SHCal20","shcal20.14c");
+  Date(Prior("Start of Inka occupation","Start_Inca_Occupation.prior"))
+  {
+   color="#882255";
+  };
+  Sequence("Uspallata")
+  {
+   Boundary("Start");
+   Phase("Migrant phase")
+   {
+	Phase("Potrero Las Colonias")
+	{
+ 	R_Date("AR0185 (D-AMS 047821)",850,21)
+ 	{
+  	color="#332288";
+  	Site="Osario Potrero Las Colonias";
+ 	};
+ 	R_Date("AR0192 (D-AMS 047819)",834,19)
+ 	{
+  	color="#332288";
+  	Site="Osario Potrero Las Colonias";
+ 	};
+ 	R_Date("AR0188 (D-AMS 047822)",747,19)
+ 	{
+  	color="#332288";
+  	Site="Osario Potrero Las Colonias";
+ 	};
+ 	R_Date("AR0512 (D-AMS-033194)",682,25)
+ 	{
+  	color="#332288";
+  	Site="Osario Potrero Las Colonias";
+ 	};
+ 	R_Date("AR0504 (CIRAM-5976)",667,27)
+ 	{
+  	Outlier("offset 32 to 49 yr", 1);
+  	color="#332288";
+  	site="Osario Potrero Las Colonias";
+  	element="petrous";
+  	turnover_window="birth to 2 years";
+  	age_at_death="35 to 49 years";
+ 	};
+ 	R_Date("PLC-152 (D-AMS-031415)",634,28)
+ 	{
+  	color="#332288";
+  	Site="Osario Potrero Las Colonias";
+ 	};
+ 	R_Date("PLC-284 (AA-66564)",568,38)
+ 	{
+  	color="#332288";
+  	Site="Osario Potrero Las Colonias";
+ 	};
+ 	R_Date("AR0520 (CIRAM-11749)", 671, 30)
+ 	{
+  	Outlier("offset 32 to 49 yr", 1);
+  	color="#332288";
+  	Site="Osario Potrero Las Colonias";
+  	element="petrous";
+  	turnover_window="birth to 2 years";
+  	age_at_death="35 to 49 years";
+ 	};
+ 	Phase("AR0523 kin group")
+ 	{
+  	R_Date("AR0523 (CIRAM-11747)", 709, 30)
+  	{
+   	Outlier("offset 32 to 49 yr", 1);
+   	color="#332288";
+   	site="Osario Potrero Las Colonias";
+   	individual="AR0523";
+   	association="third degree w AR0514";
+   	association2="second degree w AR0519";
+   	association2="second degree w AR0524";
+   	element="petrous";
+   	turnover_window="birth to 2 years";
+   	age_at_death="35 to 49 years";
+  	};
+  	R_Date("AR0514 (CIRAM-11748)", 686, 29)
+  	{
+   	Outlier("offset 32 to 49 yr", 1);
+   	color="#332288";
+   	site="Osario Potrero Las Colonias";
+   	individual="AR0514";
+   	association="third degree with AR0523";
+   	element="petrous";
+   	turnover_window="birth to 2 years";
+   	age_at_death="35 to 49 years";
+  	};
+  	R_Date("AR0519 (CIRAM-11745)", 719, 30)
+  	{
+   	Outlier("offset 32 to 49 yr", 1);
+   	color="#332288";
+   	site="Osario Potrero Las Colonias";
+   	individual="AR0519";
+   	association="second degree w AR0523";
+   	element="petrous";
+   	turnover_window="birth to 2 years";
+   	age_at_death="35 to 49 years";
+  	};
+  	R_Date("AR0524 (D-AMS 047820)",744,19)
+  	{
+   	color="#332288";
+   	site="Osario Potrero Las Colonias";
+   	individual="AR0524";
+   	association="second degree w AR0523";
+  	};
+  	Interval(N(35, 26));
+ 	};
+ 	Phase("AR0195 kin group")
+ 	{
+  	R_Date("AR0510 (CIRAM-11746)", 646, 30)
+  	{
+   	color="#332288";
+   	site="Osario Potrero Las Colonias";
+   	individual="AR0510";
+   	association="third degree w AR0195";
+  	};
+  	R_Date("AR0195 (CIRAM-11751)", 689, 29)
+  	{
+   	Outlier("offset 28 to 49 yrs", 1);
+   	color="#332288";
+   	site="Osario Potrero Las Colonias";
+   	individual="AR0195";
+   	association="parent-child w AR0505";
+   	association2="third degree w AR0510";
+   	element="PM1d Mx";
+   	turnover_window="birth to 9 years";
+   	age_at_death="35 to 49 years";
+  	};
+  	R_Date("AR0505 (D-AMS 047823)",739,19)
+  	{
+   	color="#332288";
+   	site="Osario Potrero Las Colonias";
+   	individual="AR0505";
+   	association="parent-child w AR0195";
+  	};
+  	Interval(N(35, 26));
+ 	};
+	};
+	Phase("Túmulo III")
+	{
+ 	R_Date("TIII-3 (CIRAM-5973)",716,27)
+ 	{
+  	color="#44AA99";
+  	Site="Túmulo III";
+  	longitude=-69.360288;
+  	latitude=-32.587191;
+ 	};
+ 	R_Date("TIII-1 (CIRAM-5975)",651,27)
+ 	{
+  	color="#44AA99";
+  	Site="Túmulo III";
+  	longitude=-69.360288;
+  	latitude=-32.587191;
+ 	};
+ 	R_Date("TIII-5 (CIRAM-5974)",645,27)
+ 	{
+  	color="#44AA99";
+  	Site="Túmulo III";
+  	longitude=-69.360288;
+  	latitude=-32.587191;
+ 	};
+ 	R_Date("TIII-146 (D-AMS 047825)",784,19)
+ 	{
+  	color="#44AA99";
+  	Site="Túmulo III";
+  	longitude=-69.360288;
+  	latitude=-32.587191;
+ 	};
+ 	R_Date("TIII-145 (D-AMS 047824)",753,20)
+ 	{
+  	color="#44AA99";
+  	Site="Túmulo III";
+  	longitude=-69.360288;
+  	latitude=-32.587191;
+ 	};
+ 	R_Date("TIII-1097 (AA-66566)",671,40)
+ 	{
+  	color="#44AA99";
+  	Site="Túmulo III";
+  	longitude=-69.360288;
+  	latitude=-32.587191;
+ 	};
+ 	R_Date("TIII-1145 (CIRAM-7970)", 750, 28)
+ 	{
+  	color="#44AA99";
+  	Site="Túmulo III";
+  	longitude=-69.360288;
+  	latitude=-32.587191;
+ 	};
+ 	R_Date("TIII-1146 (CIRAM-7971)", 669, 29)
+ 	{
+  	color="#44AA99";
+  	Site="Túmulo III";
+  	longitude=-69.360288;
+  	latitude=-32.587191;
+ 	};
+	};
+	Phase("Ursina Sur 2")
+	{
+ 	R_Date("US2 (D-AMS-033193)",772,25)
+ 	{
+  	color="#DDCC77";
+  	Site="Usina Sur 2";
+  	longitude=-69.374458;
+  	latitude=-32.634250;
+ 	};
+	};
+	Phase("Agua de las Avispas")
+	{
+ 	R_Date("A.Av. (CIRAM-7986)",579,28)
+ 	{
+  	color="#88CCEE";
+  	Site="Agua de las Avispas";
+  	longitude=-69.128660;
+  	latitude=-33.073584;
+ 	};
+	};
+	Interval("Duration migrant phase");
+   };
+   Boundary("End");
+  };
+  Sequence()
+  {
+   Boundary("=Start");
+   Interval("Interval between migrant phase and Inka start");
+   Boundary("=Start of Inka occupation");
+  };
+  Difference("Start Inka vs Start UV","Start of Inka occupation","Start");
+  Difference("Start Inka vs End UV","Start of Inka occupation","End");
+ };
+Fig. S30 (Model for site PLC).
+Plot()
+ {
+  Outlier_Model("offset 32 to 49 yr",Exp(1,-10,0),U(1.5,1.7),"t");
+  Outlier_Model("offset 28 to 49 yr",Exp(1,-10,0),U(1.4,1.7),"t");
+  Curve("SHCal20","shcal20.14c");
+  Date(Prior("Start of Inka occupation","Start_Inca_Occupation.prior"))
+  {
+   color="#882255";
+  };
+  Sequence("Potrero Las Colonias")
+  {
+   Boundary("Start");
+   Phase("Migrant phase")
+   {
+	R_Date("D-AMS 047821",850,21)
+	{
+ 	color="#332288";
+ 	Site="Osario Potrero Las Colonias";
+	};
+	R_Date("D-AMS 047819",834,19)
+	{
+ 	color="#332288";
+ 	Site="Osario Potrero Las Colonias";
+	};
+	R_Date("D-AMS 047822",747,19)
+	{
+ 	color="#332288";
+ 	Site="Osario Potrero Las Colonias";
+	};
+	R_Date("D-AMS-033194",682,25)
+	{
+ 	color="#332288";
+ 	Site="Osario Potrero Las Colonias";
+	};
+	R_Date("CIRAM-5976",667,27)
+	{
+ 	Outlier("offset 32 to 49 yr", 1);
+ 	color="#332288";
+ 	site="Osario Potrero Las Colonias";
+ 	element="petrous";
+ 	turnover_window="birth to 2 years";
+ 	age_at_death="35 to 49 years";
+	};
+	R_Date("D-AMS-031415",634,28)
+	{
+ 	color="#332288";
+ 	Site="Osario Potrero Las Colonias";
+	};
+	R_Date("AA-66564",568,38)
+	{
+ 	color="#332288";
+ 	Site="Osario Potrero Las Colonias";
+	};
+	R_Date("CIRAM-11749", 671, 30)
+	{
+ 	Outlier("offset 32 to 49 yr", 1);
+ 	color="#332288";
+ 	Site="Osario Potrero Las Colonias";
+ 	element="petrous";
+ 	turnover_window="birth to 2 years";
+ 	age_at_death="35 to 49 years";
+	};
+	Phase("AR0523 kin group")
+	{
+ 	R_Date("CIRAM-11747", 709, 30)
+ 	{
+  	Outlier("offset 32 to 49 yr", 1);
+  	color="#332288";
+  	site="Osario Potrero Las Colonias";
+  	individual="AR0523";
+  	association="third degree w AR0514";
+  	association2="second degree w AR0519";
+  	association2="second degree w AR0524";
+  	element="petrous";
+  	turnover_window="birth to 2 years";
+  	age_at_death="35 to 49 years";
+ 	};
+ 	R_Date("CIRAM-11748", 686, 29)
+ 	{
+  	Outlier("offset 32 to 49 yr", 1);
+  	color="#332288";
+  	site="Osario Potrero Las Colonias";
+  	individual="AR0514";
+  	association="third degree with AR0523";
+  	element="petrous";
+  	turnover_window="birth to 2 years";
+  	age_at_death="35 to 49 years";
+ 	};
+ 	R_Date("CIRAM-11745", 719, 30)
+ 	{
+  	Outlier("offset 32 to 49 yr", 1);
+  	color="#332288";
+  	site="Osario Potrero Las Colonias";
+  	individual="AR0519";
+  	association="second degree w AR0523";
+  	element="petrous";
+  	turnover_window="birth to 2 years";
+  	age_at_death="35 to 49 years";
+ 	};
+ 	R_Date("D-AMS 047820",744,19)
+ 	{
+  	color="#332288";
+  	site="Osario Potrero Las Colonias";
+  	individual="AR0524";
+  	association="second degree w AR0523";
+ 	};
+ 	Interval(N(35, 26));
+	};
+	Phase("AR0195 kin group")
+	{
+ 	R_Date("CIRAM-11746", 646, 30)
+ 	{
+  	color="#332288";
+  	site="Osario Potrero Las Colonias";
+  	individual="AR0510";
+  	association="third degree w AR0195";
+ 	};
+ 	R_Date("CIRAM-11751", 689, 29)
+ 	{
+  	Outlier("offset 28 to 49 yrs", 1);
+  	color="#332288";
+  	site="Osario Potrero Las Colonias";
+  	individual="AR0195";
+  	association="parent-child w AR0505";
+  	association2="third degree w AR0510";
+  	element="PM1d Mx";
+  	turnover_window="birth to 9 years";
+  	age_at_death="35 to 49 years";
+ 	};
+ 	R_Date("D-AMS 047823",739,19)
+ 	{
+  	color="#332288";
+  	site="Osario Potrero Las Colonias";
+  	individual="AR0505";
+  	association="parent-child w AR0195";
+ 	};
+ 	Interval(N(35, 26));
+	};
+	Interval("Duration migrant phase");
+	Date("Date migrant phase");
+   };
+   Boundary("End");
+  };
+  Sequence()
+  {
+   Boundary("=Start");
+   Interval("Interval between migrant phase and Inka start");
+   Boundary("=Start of Inka occupation");
+  };
+ };
+ 
+Fig. S31. Model for site T-III.
+Plot()
+ {
+  Curve("SHCal20","shcal20.14c");
+  Date(Prior("Start of Inka occupation","Start_Inca_Occupation.prior"))
+  {
+   color="#882255";
+  };
+  Sequence("Túmulo III")
+  {
+   Boundary("Start");
+   Phase("Migrant phase")
+   {
+	R_Date("CIRAM-5973",716,27)
+	{
+ 	color="#44AA99";
+	};
+	R_Date("CIRAM-5975",651,27)
+	{
+ 	color="#44AA99";
+	};
+	R_Date("CIRAM-5974",645,27)
+	{
+ 	color="#44AA99";
+	};
+	R_Date("D-AMS 047825",784,19)
+	{
+ 	color="#44AA99";
+	};
+	R_Date("D-AMS 047824",753,20)
+	{
+ 	color="#44AA99";
+	};
+	R_Date("AA-66566",671,40)
+	{
+ 	color="#44AA99";
+	};
+	R_Date("CIRAM-7970", 750, 28)
+	{
+ 	color="#44AA99";
+	};
+	R_Date("CIRAM-7971", 669, 29)
+	{
+ 	color="#44AA99";
+	};
+	Interval("Duration");
+   };
+   Boundary("End");
+  };
+ };
+ 
+Fig. S32. (Differences; saved .prior files are needed).
+Phase("Start of Uspallata vs Start Potrero Las Colonias")
+ {
+  Date(Prior("U","Start_Uspallata.prior"));
+  Date(Prior("P","Start_Potrero.prior"));
+  Difference( "D", "U", "P");
+ };
+ Phase("End of Uspallata vs End Potrero Las Colonias")
+ {
+  Date(Prior("S","End_Uspallata.prior"));
+  Date(Prior("P","End_Potrero.prior"));
+  Difference("D","S","P");
+ };
+ Phase("Start of Uspallata vs Start Tumulo")
+ {
+  Date(Prior("U","Start_Uspallata.prior"));
+  Date(Prior("T","Start_Tumulo.prior"));
+  Difference( "D", "U", "T");
+ };
+ Phase("End of Uspallata vs End Tumulo")
+ {
+  Date(Prior("S","End_Uspallata.prior"));
+  Date(Prior("T","End_Tumulo.prior"));
+  Difference("D","S","T");
+ };
+ Phase("Start of Potrero Las Colonias vs Start Tumulo")
+ {
+  Date(Prior("P","Start_Potrero.prior"));
+  Date(Prior("T","Start_Tumulo.prior"));
+  Difference( "D", "P", "T");
+ };
+ Phase("End of Potrero Las Colonias vs End Tumulo")
+ {
+  Date(Prior("P","End_Potrero.prior"));
+  Date(Prior("T","End_Tumulo.prior"));
+  Difference( "D", "P", "T");
+ };
+ Phase("Start of Uspallata vs Start of Inka")
+ {
+  Date(Prior("U","Start_Uspallata.prior"));
+  Date(Prior("I","Start_Inca_Occupation.prior"));
+  Difference( "D", "U", "I");
+ };
+

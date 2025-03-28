@@ -4,7 +4,7 @@ setwd("~/Documents/PostDocPasteur/aDNA/2024-09-01_Uspallata_noHighCov/Analyses/F
 
 
 
-tableIND<-read.table("Maps/AnnotIndividualsIncluded.tsv",stringsAsFactors = F,header=T)
+tableIND<-read.table("Maps/AnnotIndividualsIncluded.tsv",stringsAsFactors = F,header=T,sep="\t")
 ###Table A: f3
 a1240<-read.table("../F3_IND/Lab_with_Compendium_GEHmodern.1240K/TH50000/Lab_with_Compendium_GEHmodern.1240K.OUT",stringsAsFactors = F,header=T)
 a1240<-a1240[a1240$Source1 %in% tableIND$Individual[ tableIND$FstatsAncient_1240K] & a1240$Source2 %in% tableIND$Individual[ tableIND$FstatsAncient_1240K],]

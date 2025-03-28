@@ -1,23 +1,30 @@
 #!/bin/Rscript
 require(ggplot2)
+require(stringr)
 require(ggbeeswarm)
 
 setwd("~/Documents/PostDocPasteur/aDNA/2024-09-01_Uspallata_noHighCov/Analyses/Final_Plots_F/")
-orderRegions<-read.table("../AdmixtureOnlyAncient/listRegionOrdered.txt",stringsAsFactors = F,header=F)$V1
+orderRegions<-read.table("NeHapROH_vsCondHE/listRegionOrdered.txt",stringsAsFactors = F,header=F)$V1
 focusplot="points"
 THcond="50000"
 
 
 listPOP<-c()
 
-for(setCond in c("SG","1240K")){
+for(setCond in c("SG","1240K")[2]){
   
   
   annot<-read.table("../../../ReferenceDataSet/ColorCompendium_ModernAndAncient_NoReichSG.tsv",stringsAsFactors = F,header=T,sep="\t",comment.char = "@",quote="\"")
   annotUsp<-read.table("../../Uspallata_Annotation.tsv",stringsAsFactors = F,header=T,comment.char = "@",sep="\t")
+  annotUsp$MainRegion<-ifelse(annotUsp$MainRegion=="Migrant","LH-MF",
+                              ifelse(annotUsp$MainRegion=="Local_Late","LH-LF",
+                                     ifelse(annotUsp$MainRegion=="Local_Early","LH-HG",
+                                            ifelse(annotUsp$MainRegion=="Local_PLC","LH-LFplc",
+                                                   ifelse(annotUsp$MainRegion=="Migrant_Outlier","LH-MFout","WTF")))))
   annotUsp<-unique(annotUsp[,c("MainRegion","MainRegion","Color","Point")])
   names(annotUsp)[c(1:2)]<-c("Region","Population")
-  annotUsp<-annotUsp[ ! (annotUsp$Region=="Local_Late" & annotUsp$Point %in% c(22,24)),]
+  annotUsp<-annotUsp[ ! (annotUsp$Region=="LH-LF" & annotUsp$Point %in% c(22,24)),]
+  
   annot<-annot[   grepl("Brazil",annot$Region) | 
                     grepl("California",annot$Region) |
                     grepl("CentralAmerica",annot$Region) | 
@@ -43,6 +50,17 @@ for(setCond in c("SG","1240K")){
   condHE_perPop<-read.table(paste("../ConditionalHeterozygosity/Lab_with_Compendium.",setCond,"/CondHet.",setCond,".TH",THcond,".ConditionalHeterozygosity.tsv",sep=""),
                             stringsAsFactors = F,header=T)
   
+  condHE_perPop$Population<-ifelse(condHE_perPop$Population=="Migrant","LH-MF",
+                                   ifelse(condHE_perPop$Population=="Local_Late","LH-LF",
+                                          ifelse(condHE_perPop$Population=="Local_Early","LH-HG",
+                                                 ifelse(condHE_perPop$Population=="Local_PLC","LH-LFplc",
+                                                        ifelse(condHE_perPop$Population=="Migrant_Outlier","LH-MFout",condHE_perPop$Population)))))
+  
+  condHE_perReg$Population<-ifelse(condHE_perReg$Population=="Migrant","LH-MF",
+                                   ifelse(condHE_perReg$Population=="Local_Late","LH-LF",
+                                          ifelse(condHE_perReg$Population=="Local_Early","LH-HG",
+                                                 ifelse(condHE_perReg$Population=="Local_PLC","LH-LFplc",
+                                                        ifelse(condHE_perReg$Population=="Migrant_Outlier","LH-MFout",condHE_perReg$Population)))))
   NEroh_perReg<-read.csv("../hapROH/NeEstimate_TH400000/RefByRegion_Ne_estimates.tsv",stringsAsFactors = F,header=T,sep="\t")
   NEroh_perReg<-NEroh_perReg[! is.na(NEroh_perReg$std.err),]
   
@@ -54,7 +72,19 @@ for(setCond in c("SG","1240K")){
   NEroh_perReg<-rbind(NEroh_perReg,NEroh_Usp)
   NEroh_perPop<-rbind(NEroh_perPop,NEroh_Usp)
   
-  print(NEroh_perReg[ NEroh_perReg$Population=="Migrant",])
+  NEroh_perReg$Population<-ifelse(NEroh_perReg$Population=="Migrant","LH-MF",
+                                  ifelse(NEroh_perReg$Population=="Local_Late","LH-LF",
+                                         ifelse(NEroh_perReg$Population=="Local_Early","LH-HG",
+                                                ifelse(NEroh_perReg$Population=="Local_PLC","LH-LFplc",
+                                                       ifelse(NEroh_perReg$Population=="Migrant_Outlier","LH-MFout",NEroh_perReg$Population)))))
+  
+  NEroh_perPop$Population<-ifelse(NEroh_perPop$Population=="Migrant","LH-MF",
+                                  ifelse(NEroh_perPop$Population=="Local_Late","LH-LF",
+                                         ifelse(NEroh_perPop$Population=="Local_Early","LH-HG",
+                                                ifelse(NEroh_perPop$Population=="Local_PLC","LH-LFplc",
+                                                       ifelse(NEroh_perPop$Population=="Migrant_Outlier","LH-MFout",NEroh_perPop$Population)))))
+  
+  
   
   pdf(paste("NeHapROH_vsCondHE/NeHapROH_vsCondHE.",setCond,".TH",THcond,".pdf",sep=""))
   
@@ -77,14 +107,14 @@ for(setCond in c("SG","1240K")){
     
     print(nrow(out_REF))
     ##get Uspallata entries
-    Migrants=out[ grepl("Migrant",out$Population) ,]
-    Local_Early=out[ grepl("Local_Early",out$Population) ,]
-    Local_Late=out[ grepl("Local_Late",out$Population),]
+    Migrants=out[ grepl("LH-MF",out$Population) ,]
+    Local_Early=out[ grepl("LH-HG",out$Population) ,]
+    Local_Late=out[ grepl("LH-LF",out$Population),]
     
     ###remove very low confidence Ne estimations
     out_REF<-out_REF[ out_REF$std.err <200,]  
     print(nrow(out_REF))
-    out_REF<-out_REF[! out_REF$Population %in% c("Migrant","Local_Early","Local_Late"),]
+    out_REF<-out_REF[! out_REF$Population %in% c("LH-MF","LH-HG","LF-LF"),]
     
     
     ###get range for plot
@@ -190,7 +220,7 @@ for(setCond in c("SG","1240K")){
     #legend("bottom",pch=c(21,21,23),pt.bg=c("goldenrod1","darkorange4","darkorange4"), col="black",
     #                                          legend = c("Migrants","Local_Late","Local_Early"))
     legend("bottom",pch=c(21,21,23),pt.bg=c("goldenrod1","darkorange4"), col="black",
-           legend = c("Migrants","Local_Late"))
+           legend = c("LH-MF","LH-LF"))
     
     
     listPOP<-unique(c(listPOP,condHE_perPop$Population,NEroh_perPop$Population))
@@ -205,7 +235,8 @@ for(setCond in c("SG","1240K")){
   #######NOW ONLY He
   write.table(NEroh_perPop$Population[ NEroh_perPop$Population %in% annot$Group],paste("NeHapROH_vsCondHE/Only.",setCond,".TH",THcond,".ListPops.tsv",sep=""),col.names=F,row.names=F,quote=F)
   
-  pdf(paste("NeHapROH_vsCondHE/Only.",setCond,".TH",THcond,".pdf",sep=""),width=10)
+  #pdf(paste("NeHapROH_vsCondHE/OnlyHE.",setCond,".TH",THcond,".pdf",sep=""),width=10)
+  svg(paste("NeHapROH_vsCondHE/OnlyHE.",setCond,".TH",THcond,".svg",sep=""),width=10)
   
   for(refs in c("Population","Region")[1]){
     if(refs=="Population"){
@@ -279,7 +310,8 @@ for(setCond in c("SG","1240K")){
 
 #######NOW ONLY NE
 
-pdf(paste("NeHapROH_vsCondHE/OnlyNefromHapROH.pdf",sep=""),width=10)
+#pdf(paste("NeHapROH_vsCondHE/OnlyNefromHapROH.pdf",sep=""),width=10)
+svg(paste("NeHapROH_vsCondHE/OnlyNefromHapROH.svg",sep=""),width=10)
 
 for(refs in c("Population","Region")[1]){
   if(refs=="Population"){
@@ -353,11 +385,11 @@ dev.off()
 
 annot<-annot[ annot$Population %in% listPOP,]
 
-listREG<-read.table("../AdmixtureOnlyAncient/listRegionOrdered.txt",stringsAsFactors = F,header=F)$V1
+listREG<-read.table("NeHapROH_vsCondHE/listRegionOrdered.txt",stringsAsFactors = F,header=F)$V1
 
 annot$cex=0.5
 forLeg<-c()
-for(reg in listREG[ listREG %in% annot$Region & ! (grepl("Local",listREG) | grepl("Migrant",listREG))]){
+for(reg in listREG[ listREG %in% annot$Region & ! (grepl("LH-HG",listREG) | grepl("LH-LF",listREG) | grepl("LH-MF",listREG))]){
   forLeg<-rbind(forLeg,cbind("Population"=reg,"Point"=NA,"Color"=NA,"cex"=0.8))
   for(pop in annot$Population[ annot$Region==reg]){
     forLeg<-rbind(forLeg,annot[ annot$Population==pop,c("Population","Point","Color","cex")])
@@ -365,7 +397,7 @@ for(reg in listREG[ listREG %in% annot$Region & ! (grepl("Local",listREG) | grep
 }
 
 forLeg<-rbind(forLeg,cbind("Population"="Uspallata","Point"=NA,"Color"=NA,"cex"=1.5))
-forLeg<-rbind(forLeg,annot[ (grepl("Local",annot$Region) | grepl("Migrant",annot$Region)),c("Population","Point","Color","cex")])
+forLeg<-rbind(forLeg,annot[ (grepl("LH-HG",listREG) | grepl("LH-LF",listREG) | grepl("LH-MF",listREG)),c("Population","Point","Color","cex")])
 forLeg$Population<-ifelse(forLeg$Population=="Migrant","LH-MF",
                           ifelse(forLeg$Population=="Migrant_outlier","LH-MFout",
                                  ifelse(forLeg$Population=="Local_Early","LH-HG",
