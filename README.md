@@ -31,5 +31,5 @@
 - OxCalCode: Lorena Becerra-Valdivia (lorena.becerra-valdivia@bristol.ac.uk)
 - Random Forest: Maël Le Corre (mael.lecorre@mnhn.fr)
 - Diet Isotopes: Augusto Tessone (gutitessone@gmail.com)
-- Mobility Isotopes:Ramiro Barberena (rbarberena@mendoza-conicet.gob.ar)
+- Mobility Isotopes: Ramiro Barberena (rbarberena@mendoza-conicet.gob.ar) and Maël Le Corre (mael.lecorre@mnhn.fr)
 
