@@ -2,7 +2,7 @@
 
 ## Brief description of the scripts
 
-### Paleogenomics analyses: Pierre Luisi (pierre.luisi@unc.edu.ar)
+### Paleogenomics analyses
 - CheckProportionInModern.R: check admixture proportions in Modern populations (pie charts and boxplots)
 - DemoCurves.R: plot demographic curves derived from mtDNA  and autosomal markers
 - F3byIND_plot.R: plot MDS from f3-based pairwise individual genetic distances
@@ -17,10 +17,10 @@
 - plotF4__EarlyLate_vsREF.R: plot f4 to compare ref groups to farmers and Hunter-gatherers in UV
 - plotF4_toPairwiseRefs.R: plot f4 to compare UV to pairs of AMerican groups
 
-### Random Forest Modeling of Bioavailable Strontium: Maël Le Corre (mael.lecorre@mnhn.fr)
+### Random Forest Modeling of Bioavailable Strontium
 - script_RF_isoscape_uspallata.R: Random Forest Modeling of Bioavailable Strontium
 
-### OxCalCode: Lorena Becerra-Valdivia (lorena.becerra-valdivia@bristol.ac.uk)
+### OxCalCode
 - OxCalCode.txt: the code used in OxCal analyses
 
 ### Diet and Mobility Isotopes
@@ -32,5 +32,4 @@
 - Random Forest: Maël Le Corre (mael.lecorre@mnhn.fr)
 - Diet Isotopes: Augusto Tessone (gutitessone@gmail.com)
 - Mobility Isotopes:Ramiro Barberena (rbarberena@mendoza-conicet.gob.ar)
-- Maps: Gustavo Lucero (glucero@uct.cl)
 
