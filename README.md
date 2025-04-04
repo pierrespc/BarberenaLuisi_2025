@@ -27,7 +27,7 @@
 - makeFigureIsotopes.R: plot the isotopes analyses
 
 ## Credits
-
+- Paleogenomics: Pierre Luisi (pierre.luisi@unc.edu.ar)
 - OxCalCode: Lorena Becerra-Valdivia (lorena.becerra-valdivia@bristol.ac.uk)
 - Random Forest: Maël Le Corre (mael.lecorre@mnhn.fr)
 - Diet Isotopes: Augusto Tessone (gutitessone@gmail.com)
