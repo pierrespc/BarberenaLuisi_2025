@@ -4,7 +4,7 @@ require(stringr)
 #library(reshape2)
 #library(ggrepel)
 library(ggplot2)
-
+library(scales)
 #require(viridis)
 
 setwd("~/Documents/PostDocPasteur/aDNA/2024-09-01_Uspallata_noHighCov/Analyses/Final_Plots_F/")
@@ -14,7 +14,7 @@ setwd("~/Documents/PostDocPasteur/aDNA/2024-09-01_Uspallata_noHighCov/Analyses/F
 ###########################################################################
 ###########################################################################
 
-plotMDS<-function(mdsFun,Maintitle,pdfName,Doggplot=T){
+plotMDS<-function(mdsFun,Maintitle,percentage,pdfName,Doggplot=T){
   #print(head(mdsFun))
   #print(sum(str_starts(names(mdsFun),"X")))
   #pdf(pdfName)
@@ -24,8 +24,8 @@ plotMDS<-function(mdsFun,Maintitle,pdfName,Doggplot=T){
       svg(paste(pdfName,"_Dim",i,".Dim",i+1,".svg",sep=""))
       plot(mdsFun[,paste("X",i,sep="")],mdsFun[,paste("X",i+1,sep="")],"n",
            main=paste(Maintitle,"\nDim. ",i+1," vs Dim. ",i,sep=""),
-           xlab=paste("Dim.",i),
-           ylab=paste("Dim.",i+1))
+           xlab=paste("Dim. ",i, " (",percentage[i],"%)",sep=""),
+           ylab=paste("Dim.",i+1," (",percentage[i+1],"%)",sep=""))
       points(mdsFun[ mdsFun$Study!="PresentStudy",paste("X",i,sep="")],mdsFun[mdsFun$Study!="PresentStudy",paste("X",i+1,sep="")],
              pch=mdsFun$Point[ mdsFun$Study!="PresentStudy"],
              col=ifelse(mdsFun$Point[mdsFun$Study!="PresentStudy"]<21,mdsFun$Color[mdsFun$Study!="PresentStudy"],"black"),
@@ -233,14 +233,16 @@ for(setsnp in c("1240K","1240K.TVs","SG","SG.TVs")[1]){
     #print(unique(sort(Colors$Region[ Colors$Individual %in% INDSub])))
     dmSub<-dm[ rownames(dm) %in% INDSub, colnames(dm) %in% INDSub ]
     
-    mds<-cmdscale(dmSub,12)
-    mds<-data.frame(mds)
+    mdsOUT<-cmdscale(dmSub,12,eig=T)
+    mds<-data.frame(mdsOUT$points)
+    perc<-round(100*mdsOUT$eig/sum(mdsOUT$eig),digits = 2)
     mds$Individual<-row.names(mds)
     print(famind[ famind$Individual %in% mds$Individual[ !mds$Individual %in% Colors$Individual],])
     mds<-merge(mds,Colors,by="Individual")
     
     plotMDS(mds,
             setsnp,
+            perc,
             #paste("F3_IND/",setind,".",setsnp,"_MDS.",subset,".pdf",sep=""),F)
             paste("F3_IND/",setind,".",setsnp,"_MDS.",subset,".svg",sep=""),F)
     #write.table(mds,paste("F3_IND/",setind,".",setsnp,"_MDS.",subset,".tsv",sep=""),col.names=T,row.names=F,sep="\t",quote=F)
