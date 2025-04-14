@@ -236,6 +236,7 @@ for(setCond in c("SG","1240K")[2]){
   write.table(NEroh_perPop$Population[ NEroh_perPop$Population %in% annot$Group],paste("NeHapROH_vsCondHE/Only.",setCond,".TH",THcond,".ListPops.tsv",sep=""),col.names=F,row.names=F,quote=F)
   
   #pdf(paste("NeHapROH_vsCondHE/OnlyHE.",setCond,".TH",THcond,".pdf",sep=""),width=10)
+  #svg(paste("NeHapROH_vsCondHE/OnlyHE.",setCond,".TH",THcond,".svg",sep=""),height=10)
   svg(paste("NeHapROH_vsCondHE/OnlyHE.",setCond,".TH",THcond,".svg",sep=""),width=10)
   
   for(refs in c("Population","Region")[1]){
@@ -284,6 +285,7 @@ for(setCond in c("SG","1240K")[2]){
     out_REF$lower=out_REF$D-2*out_REF$SE
     out_REF$upper=out_REF$D+2*out_REF$SE
     print(ggplot(data = out_REF,aes(x=x,y=D)) +
+            #coord_flip()+
             #geom_point(position = position_jitter(seed = 1, width = 0.2),shape=f4$Point,fill = f4$Color,color=ifelse(f4$Point<21,f4$Color,"black"),size=2,stroke=1.3) +
             geom_errorbar(aes(ymin = lower, ymax = upper,color=Population), width = 0.01)+
             
@@ -295,7 +297,7 @@ for(setCond in c("SG","1240K")[2]){
             scale_size_manual(values = sizeScale)+
             theme_classic()+
             theme(legend.position="none",
-                  axis.text = element_text(size = 10),
+                  axis.text = element_text(size = 11),
                   axis.text.x = element_text(angle = 90,hjust = 1,vjust=0.5,color=breaksColor))+
             labs(x="",y="Conditional Heterozygosity")+
             scale_x_continuous(breaks=breaks,name = names(breaks)))
@@ -311,6 +313,7 @@ for(setCond in c("SG","1240K")[2]){
 #######NOW ONLY NE
 
 #pdf(paste("NeHapROH_vsCondHE/OnlyNefromHapROH.pdf",sep=""),width=10)
+#svg(paste("NeHapROH_vsCondHE/OnlyNefromHapROH.svg",sep=""),height=10)
 svg(paste("NeHapROH_vsCondHE/OnlyNefromHapROH.svg",sep=""),width=10)
 
 for(refs in c("Population","Region")[1]){
@@ -360,6 +363,7 @@ for(refs in c("Population","Region")[1]){
   out_REF$lower=out_REF$Ne-2*out_REF$std.err
   out_REF$upper=out_REF$Ne+2*out_REF$std.err
   print(ggplot(data = out_REF,aes(x=x,y=Ne)) +
+          #coord_flip()+
           #geom_point(position = position_jitter(seed = 1, width = 0.2),shape=f4$Point,fill = f4$Color,color=ifelse(f4$Point<21,f4$Color,"black"),size=2,stroke=1.3) +
           geom_errorbar(aes(ymin = lower, ymax = upper,color=Population), width = 0.01)+
           
@@ -371,7 +375,7 @@ for(refs in c("Population","Region")[1]){
           scale_size_manual(values = sizeScale)+
           theme_classic()+
           theme(legend.position="none",
-                axis.text = element_text(size = 10),
+                axis.text = element_text(size = 11),
                 axis.text.x = element_text(angle = 90,hjust = 1,vjust=0.5,color=breaksColor))+
           labs(x="",y="Ne")+
           scale_x_continuous(breaks=breaks,name = names(breaks)))

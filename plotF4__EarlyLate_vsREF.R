@@ -49,7 +49,7 @@ for(type in c("SNA")){
     f4popy$Pop4_Z[f4popy$Pop4_Z=="Early"]<-"LH-HG"
     f4popy$Pop2_X[f4popy$Pop2_X=="Late"]<-"LH-F"
     f4popy$Pop4_Z[f4popy$Pop4_Z=="Late"]<-"LH-F"
-    f4popy$Compa<-paste("F4(Mbuti,",f4popy$Pop2_X,";\nancient SA group;\n",f4popy$Pop4_Z,")",sep="")
+    f4popy$Compa<-paste("f4(Mbuti,",f4popy$Pop2_X,";\nancient American;\n",f4popy$Pop4_Z,")",sep="")
     f4popy$REF=f4popy$Pop3_Y
     
     
@@ -61,18 +61,18 @@ for(type in c("SNA")){
     f4popx$Pop4_Z[f4popx$Pop4_Z=="Early"]<-"LH-HG"
     f4popx$Pop3_Y[f4popx$Pop3_Y=="Late"]<-"LH-F"
     f4popx$Pop4_Z[f4popx$Pop4_Z=="Late"]<-"LH-F"
-    f4popx$Compa<-paste("F4(Mbuti,ancient ",type,";\n",f4popx$Pop3_Y,",",f4popx$Pop4_Z,")",sep="")
+    f4popx$Compa<-paste("f4(Mbuti,\nancient American;\n",f4popx$Pop3_Y,",",f4popx$Pop4_Z,")",sep="")
     f4popx$REF=f4popx$Pop2_X
     
     
     f4<-rbind(f4popx[,c("REF","Compa","Color","Point","Region","Dstat","stderr","Z","BABA","ABBA","NSNPs")],f4popy[,c("REF","Compa","Color","Point","Region","Dstat","stderr","Z","BABA","ABBA","NSNPs")])
     
-    f4$Compa<-str_replace(f4$Compa,"ancient SA","ancient SNA")
     if(grepl("SG",set)){
       f4<-f4[ ! str_ends(f4$REF,".Capt"),]
     }
     
     svg(outfile)
+    #pdf(outfile)
     if(type=="SouthAmerica"){
       f4<-f4[  (grepl("Patagonia",f4$Region) | grepl("CentralAndes",f4$Region) | 
                   grepl("Brazil",f4$Region) | grepl("Pampa",f4$Region) |
@@ -89,7 +89,7 @@ for(type in c("SNA")){
     }
     
     breaks=seq(round(min(c(-3,f4$Z))),
-               round(max(c(3,f4$Z))),1)
+               round(max(c(3,f4$Z))),3)
     
     
     print(ggplot(f4, aes(x = Compa, y = Z)) +
@@ -104,11 +104,12 @@ for(type in c("SNA")){
             geom_hline(yintercept=0,linetype = 1)+
             theme_classic()+
             theme(legend.position="none",
-                  family="Arial",
-                  axis.text = element_text(size = 13)
+
+                  axis.text.y = element_text(angle=--90,hjust=0.5,vjust=0.5,size=15,family="Arial"),
+                  axis.text.x = element_text(hjust=0.5,vjust=1,size=15,family="Arial")
                   )+
             scale_y_continuous(breaks=breaks)+
-            labs(x="",y="Z"))
+            labs(x="",y="Z-score"))
     
     dev.off()  
     

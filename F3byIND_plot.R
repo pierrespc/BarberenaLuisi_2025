@@ -171,7 +171,7 @@ setind<-"Lab_with_Compendium_GEHmodern"
 TH<-50000
 
 ColorsALL<-c()
-for(setsnp in c("1240K","1240K.TVs","SG","SG.TVs")[1]){
+for(setsnp in c("1240K","1240K.TVs","SG","SG.TVs")){
   f3<-read.table(paste("../F3_IND/",setind,".",setsnp,"/TH",TH,"/",setind,".",setsnp,".OUT",sep=""),stringsAsFactors = F,header=T)
   f3<-f3[ ! (f3$Source1 %in% listINDremove | f3$Source2 %in% listINDremove),]
   famind<-read.table(paste("../DataSets/",setind,".",setsnp,"/","/finalSet",ifelse(TH==0,"",paste(".TH",TH,sep="")),".ind.txt",sep=""),stringsAsFactors = F,header=F)
