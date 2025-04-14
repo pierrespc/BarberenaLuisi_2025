@@ -10,6 +10,7 @@
 - MakePlotAdmixture_Masked.R: plot admixture barplots including ancient and modern individuals
 - MakePlotAdmixture_OnlyAncient.R: plot admixture barplots including ancient individuals only
 - MapWithRef.R: generate the maps and legend for the reference panels for genomic analyses
+- TimeTransect.R: generate the time scale
 - NeHapRoh_vs_ConditionnalHe.R: generate plot for hapNe and Conditional He analyses
 - plotF4_5UpsallataGroups_vsREF.R: plot f4 to compare ref groups to pairs of UV groups
 - plotF4_Modern.R: plot f4 to compare Modern to UV and other South American groups
