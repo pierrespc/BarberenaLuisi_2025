@@ -13,10 +13,14 @@
 - TimeTransect.R: generate the time scale
 - NeHapRoh_vs_ConditionnalHe.R: generate plot for hapNe and Conditional He analyses
 - plotF4_5UpsallataGroups_vsREF.R: plot f4 to compare ref groups to pairs of UV groups
-- plotF4_Modern.R: plot f4 to compare Modern to UV and other South American groups
+- plotF4_Modern_toUV-South.R plot f4 to compare Modern to UV and other South American groups
+- plotF4_UV_toPairModerns.R: plot f4 to compare UV to a pair of modern groups
 - plotF4_ToNorth.R: plot f4 to compare UV to Central/North and South American groups
 - plotF4__EarlyLate_vsREF.R: plot f4 to compare ref groups to farmers and Hunter-gatherers in UV
 - plotF4_toPairwiseRefs.R: plot f4 to compare UV to pairs of AMerican groups
+- 1_qpWave_compareDoublets_Runs.R: run qpWave analyses for duplet left pops with Admixtools2,
+- 2_plotQpWave.R: plot results of qpWave
+- AMOVA.R: perform AMOVA analyses
 
 ### Random Forest Modeling of Bioavailable Strontium
 - script_RF_isoscape_uspallata.R: Random Forest Modeling of Bioavailable Strontium

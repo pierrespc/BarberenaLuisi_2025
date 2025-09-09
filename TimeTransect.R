@@ -95,7 +95,8 @@ ref$End[ ref$start>10000]=ref$End[ ref$start>10000]-4000
 ref$Start[ ref$start>10000]=ref$start[ ref$start>10000]-4000
 
 
-svg("Maps/TimeTransect.svg",height=12)
+#svg("Maps/TimeTransect.svg",height=12)
+pdf("Maps/TimeTransect.pdf",height=12)
 #plot(0,0,"n",xlim=c(-2,nrow(dico)+nrow(ref))+0.5,ylim=c(-3000,max(c(ref$Start,dates$Start))),ann=F,axes=F)
 plot(0,0,"n",xlim=c(-2,nrow(dico)+nrow(ref))+0.5,ylim=c(-2700,9000),ann=F,axes=F)
 

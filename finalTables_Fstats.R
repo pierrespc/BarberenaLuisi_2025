@@ -1,5 +1,6 @@
 
 
+
 setwd("~/Documents/PostDocPasteur/aDNA/2024-09-01_Uspallata_noHighCov/Analyses/Final_Plots_F/")
 
 
@@ -32,6 +33,7 @@ tableA<-merge(tableA,tableIND[,c("Individual","MajorGroup","Group","Color","Poin
 names(tableA)[length(tableA)-c(0:3)]<-paste(names(tableA)[length(tableA)-c(0:3)],"1",sep="")
 
 write.table(tableA,"TableF4/tableA_f3inds.tsv",sep="\t",col.names = T,row.names=F,quote=F)
+remove(tableA)
 
 ###TableB: MDS from f3
 b1240<-read.table("../F3_IND/Lab_with_Compendium_GEHmodern.1240K/TH50000/Lab_with_Compendium_GEHmodern.1240K_MDS.NoNorthernNorthAmerica.tsv",stringsAsFactors = F,header=T,sep="\t")
@@ -56,30 +58,45 @@ tableB<-merge(tableB,bSG.tvs[,c(1:13)],by="Individual",all=T)
 
 tableB<-merge(tableB,tableIND[,c("Individual","MajorGroup","Group","Color","Point")],by="Individual")
 write.table(tableB,"TableF4/tableB_MDS.f3inds.tsv",sep="\t",col.names = T,row.names=F,quote=F)
+remove(tableB)
+###table C: modern vs UV-South
 
-###table C: vs modern
 tableC<-read.table("F4_Modern_toSouthRefUspallata/F4.Modern_toSouthRefandUspallata.finalSet.Lab_with_Compendium_GEHmodern_GenoModern.1240K.TH30000.tsv",stringsAsFactors = F,header=T,sep="\t")
 names(tableC)[c(5:10)]<-paste(names(tableC)[c(5:10)],"_1240K",sep="")
 names(tableC)<-str_replace(names(tableC),"Region","MajorGroup")
-write.table(tableC,"TableF4/tableC_f4.modern.tsv",sep="\t",col.names = T,row.names=F,quote=F)
+write.table(tableC,"TableF4/tableC_f4.Modern-toUVandSouth.tsv",sep="\t",col.names = T,row.names=F,quote=F)
+remove(tableC)
 
-###table D: vs ref vs pairsUV
-tableD<-read.table("F4_ref_toPairwiseUspallata/F4.Ref_toPairwiseUspallata.finalSet.Lab_with_Compendium_GEHmodern..TH50000.tsv",stringsAsFactors = F,header=T,sep="\t")
+###table D:  UV vs moderns
+tableD<-read.table("F4_UspallataOneGroup_toPairsModern/F4.UspallataOneGroup_toPairsModern.finalSet.Lab_with_Compendium_GEHmodern_GenoModern.1240K.TH30000.Uspallata.tsv",stringsAsFactors = F,header=T)
 names(tableD)<-str_replace(names(tableD),"Region","MajorGroup")
-write.table(tableD,"TableF4/tableD_f4.refs_vsPairsUV.tsv",sep="\t",col.names = T,row.names=F,quote=F)
+names(tableD)<-str_replace(names(tableD),".x",".Pop3_Y")
+names(tableD)<-str_replace(names(tableD),".y",".Pop4_Z")
+tableD<-tableD[,c("Pop1_W","Pop2_X","Pop3_Y","Pop4_Z","Dstat","stderr","Z","BABA","ABBA","NSNPs",
+                  "MajorGroup.Pop3_Y","Color.Pop3_Y","Point.Pop3_Y","MajorGroup.Pop4_Z","Color.Pop4_Z","Point.Pop4_Z")]
 
-###table E: UV vs pairREFs
-tableE<-read.table("F4_UspallataOneGroup_toRefs//F4.Uspallata_toPairwiseRefs.finalSet.Lab_with_Compendium_GEHmodern.TH50000.tsv",stringsAsFactors = F,header=T,sep="\t")
+write.table(tableD,"TableF4/tableD_f4.PairModerns.tsv",sep="\t",col.names = T,row.names=F,quote=F)
+remove(tableD)
+###table D: vs ref vs pairsUV
+tableE<-read.table("F4_ref_toPairwiseUspallata/F4.Ref_toPairwiseUspallata.finalSet.Lab_with_Compendium_GEHmodern..TH50000.tsv",stringsAsFactors = F,header=T,sep="\t")
 names(tableE)<-str_replace(names(tableE),"Region","MajorGroup")
-write.table(tableE,"TableF4/tableE_f4.UV_vsPairsRefs.tsv",sep="\t",col.names = T,row.names=F,quote=F)
+write.table(tableE,"TableF4/tableE_f4.refs_vsPairsUV.tsv",sep="\t",col.names = T,row.names=F,quote=F)
+remove(tableE)
 
-###table F:  UV-SA vs North
-tableF<-read.table("F4_NorthRef_toUspallataSouthRef/F4.NorthRef_toUspallataSouthRef.finalSet.Lab_with_Compendium_GEHmodern.SG.TVs.TH50000.Uspallata.summarized.tsv",stringsAsFactors = F,header=T,sep="\t")
+###table F: UV vs pairREFs
+tableF<-read.table("F4_UspallataOneGroup_toRefs//F4.Uspallata_toPairwiseRefs.finalSet.Lab_with_Compendium_GEHmodern.TH50000.tsv",stringsAsFactors = F,header=T,sep="\t")
 names(tableF)<-str_replace(names(tableF),"Region","MajorGroup")
-write.table(tableF,"TableF4/tableF_f4.North_vsUV-South.tsv",sep="\t",col.names = T,row.names=F,quote=F)
+write.table(tableF,"TableF4/tableF_f4.UV_vsPairsRefs.tsv",sep="\t",col.names = T,row.names=F,quote=F)
+remove(tableF)
 
-###table G:  Refs vs LH-MF,LH-F
-tableG<-read.table("F4_EarlyLate_vsRefs//F4_EarlyLate_vsSNARefs.tsv",stringsAsFactors = F,header=T,sep="\t")
+###table G:  UV-SA vs North
+tableG<-read.table("F4_NorthRef_toUspallataSouthRef/F4.NorthRef_toUspallataSouthRef.finalSet.Lab_with_Compendium_GEHmodern.SG.TVs.TH50000.Uspallata.summarized.tsv",stringsAsFactors = F,header=T,sep="\t")
 names(tableG)<-str_replace(names(tableG),"Region","MajorGroup")
-write.table(tableG,"TableF4/tableG_f4.EarlyLate_vsRefs.tsv",sep="\t",col.names = T,row.names=F,quote=F)
+write.table(tableG,"TableF4/tableG_f4.North_vsUV-South.tsv",sep="\t",col.names = T,row.names=F,quote=F)
+remove(tableG)
 
+###table H:  Refs vs LH-MF,LH-F
+tableH<-read.table("F4_EarlyLate_vsRefs//F4_EarlyLate_vsSNARefs.tsv",stringsAsFactors = F,header=T,sep="\t")
+names(tableH)<-str_replace(names(tableH),"Region","MajorGroup")
+write.table(tableH,"TableF4/tableH_f4.EarlyLate_vsRefs.tsv",sep="\t",col.names = T,row.names=F,quote=F)
+remove(tableH)

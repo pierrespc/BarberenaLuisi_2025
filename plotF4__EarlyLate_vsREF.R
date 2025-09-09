@@ -110,7 +110,7 @@ for(type in c("SNA")){
                   )+
             scale_y_continuous(breaks=breaks)+
             labs(x="",y="Z-score"))
-    
+    break
     dev.off()  
     
     names(f4)[1]<-paste(type,"Group",sep="")
