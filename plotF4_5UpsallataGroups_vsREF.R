@@ -97,7 +97,12 @@ for(set in c("1240K","1240K.TVs","SG","SG.TVs")){
           theme_classic()+
           theme(legend.position="none",
                 axis.text = element_text(size = 13),
-                axis.text.x=element_text(angle = 90, vjust = 0.5, hjust=1))+
+                axis.text.x=element_text(angle = 90, vjust = 0.5, hjust=1),
+                #text = element_text(family = "Arial"),
+                panel.background = element_blank(),
+                panel.border = element_rect(fill = NA),
+                plot.background = element_blank(),
+                panel.grid = element_blank())+
           scale_y_continuous(breaks=breaks)+
           labs(x="",y="Z"))
   

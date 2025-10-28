@@ -4,6 +4,7 @@
 
 ### Paleogenomics analyses
 - CheckProportionInModern.R: check admixture proportions in Modern populations (pie charts and boxplots)
+- CheckProportionInModern_6Components.R: check admixture proportions for 6 main components in Modern (Indigenous and Non-Indigenous spearately), plus scatter plot % vs Latitude or Longitude
 - DemoCurves.R: plot demographic curves derived from mtDNA  and autosomal markers
 - F3byIND_plot.R: plot MDS from f3-based pairwise individual genetic distances
 - F3byIND_plotTREE.R: plot NJ trees from f3-based pairwise individual genetic distances
@@ -21,6 +22,7 @@
 - 1_qpWave_compareDoublets_Runs.R: run qpWave analyses for duplet left pops with Admixtools2,
 - 2_plotQpWave.R: plot results of qpWave
 - AMOVA.R: perform AMOVA analyses
+- folder FSTmodern: contains the script to compute allele frequency per pop (with or without shuffling population labels), and compute Hudson FST
 
 ### Random Forest Modeling of Bioavailable Strontium
 - script_RF_isoscape_uspallata.R: Random Forest Modeling of Bioavailable Strontium

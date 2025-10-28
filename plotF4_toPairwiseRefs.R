@@ -28,11 +28,11 @@ for( setsnp in c("1240K","1240K.TVs","SG","SG.TVs")){
   for(focus in c("Uspallata")){
     
     
-    for(TEMPORAL in c("","_noLH")[2]){
+    for(TEMPORAL in c("","_noLH")){
       outfile<-paste("F4_UspallataOneGroup_toRefs/F4.Uspallata_toPairwiseRefs.finalSet.Lab_with_Compendium_GEHmodern.",setsnp,".TH",th,TEMPORAL,".pdf",sep="")
       
       pdf(outfile,width=ifelse(grepl("SG",setsnp) | TEMPORAL == "_noLH",10,12),height=ifelse(grepl("SG",setsnp) | TEMPORAL == "_noLH",10,12))
-      par(mfrow=c(1,1),mar=c(10,10,8,8)+0.1)
+      par(mfrow=c(1,1),mar=c(10,10,10,10)+0.1)
       f4<-read.table(f4file,stringsAsFactors = F,header=T,sep="\t")
       f4<-f4[ f4$Pop2_X==focus,]
       if(grepl("SG",setsnp)){

@@ -297,8 +297,13 @@ for(setCond in c("SG","1240K")[2]){
             scale_size_manual(values = sizeScale)+
             theme_classic()+
             theme(legend.position="none",
-                  axis.text = element_text(size = 11),
-                  axis.text.x = element_text(angle = 90,hjust = 1,vjust=0.5,color=breaksColor))+
+                  axis.text = element_text(size = 11,family = "Arial"),
+                  axis.text.x = element_text(angle = 90,hjust = 1,vjust=0.5,color=breaksColor),
+                  text = element_text(family = "Arial"),
+                  panel.background = element_blank(),
+                  panel.border = element_rect(fill = NA),
+                  plot.background = element_blank(),
+                  panel.grid = element_blank())+
             labs(x="",y="Conditional Heterozygosity")+
             scale_x_continuous(breaks=breaks,name = names(breaks)))
     
@@ -375,8 +380,13 @@ for(refs in c("Population","Region")[1]){
           scale_size_manual(values = sizeScale)+
           theme_classic()+
           theme(legend.position="none",
-                axis.text = element_text(size = 11),
-                axis.text.x = element_text(angle = 90,hjust = 1,vjust=0.5,color=breaksColor))+
+                axis.text = element_text(size = 11,family = "Arial"),
+                axis.text.x = element_text(angle = 90,hjust = 1,vjust=0.5,color=breaksColor),
+                text = element_text(family = "Arial"),
+                panel.background = element_blank(),
+                panel.border = element_rect(fill = NA),
+                plot.background = element_blank(),
+                panel.grid = element_blank())+
           labs(x="",y="Ne")+
           scale_x_continuous(breaks=breaks,name = names(breaks)))
   write.table(out_REF$Population,"NeHapROH_vsCondHE/OnlyNefromHapROH.ListPops.tsv",col.names=F,row.names=F,quote=F)

@@ -1,11 +1,11 @@
 #!/bin/Rscript
-library(rnaturalearth)
+#library(rnaturalearth)
 require("ggplot2")
 require("sf")
 library(ggspatial)
 
 
-PUTMODERN="ONLY" #ONLY NONE BOTH
+PUTMODERN="NONE" #ONLY NONE BOTH
 
 setwd("~/Documents/PostDocPasteur/aDNA//2024-09-01_Uspallata_noHighCov/Analyses/Final_Plots_F/Maps/")
 annot<-read.table("../../../../ReferenceDataSet/ColorCompendium_ModernAndAncient_NoReichSG.tsv",stringsAsFactors = F,header=T,sep="\t")
@@ -86,7 +86,7 @@ annotSimplifiedTOWRITE<-merge(annot[,!names(annot) %in% c("Point","Color")],uniq
 if(PUTMODERN =="NONE"){
     annot<-annot[ ! grepl("Modern",annot$Region),]
     system("mkdir OnlyAncient/")
-    ncolLeg=4
+    ncolLeg=3
 }else{
   if(PUTMODERN =="BOTH"){
     system("mkdir WithModern/")
